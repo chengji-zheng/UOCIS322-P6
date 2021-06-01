@@ -5,8 +5,8 @@ import requests
 
 app = Flask(__name__)
 
-fileType = request.form.get() # Get File Type fetched from clientSide
-qty = request.form.get()    # get the quantity from the clientSide
+fileType = request.form.get("format") # Get File Type fetched from clientSide
+qty = request.form.get("qty")    # get the quantity from the clientSide
 
 
 @app.route('/')
