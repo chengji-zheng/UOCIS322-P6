@@ -11,14 +11,15 @@ Brevet time calculator with AJAX, MongoDB, and a RESTful API!
 
 #####   4. Will also let the user to specify how many lines of data to display by using top=k.
 
-#####   5. As for the frontEnd webpage, I'll figure it out by using the extra day(s)
-* You'll also design consumer programs (e.g., in jQuery) to use the service that you expose. `website` inside `DockerRestAPI` is an example of that. It is uses PHP. You're welcome to use either PHP or jQuery to consume your services. NOTE: your consumer program should be in a different container like example in `DockerRestAPI`.
+### Progress(es) with my second commit (May 31, 2021):
+##### 1. Fixed configuration files (ie. `dockerfiles`, `docker-configure.yml`)
+##### 2. Added database drop methods to `flask_brevets.py` to drop the db before each running(adding).
+##### 3. Added website services (ie. `website.py` and `website.html`) under `website` folder
 
 ## Known Issue(s):
-###### 1. Fix the errors in the database;
-###### 2. Run tests and then debug `app.py`
-###### 3. Fifuring out and complete the front-end webpage
-###### 4. Fix dockerfiles if necessary.
+###### 1. There are two errors under `line 103` and `line 106` of `api.py` which needs to be fixed;
+###### 2. Have not tested the web services under `website` folder
+###### 3. Might have other issue(s)
 
 
 ## Credits

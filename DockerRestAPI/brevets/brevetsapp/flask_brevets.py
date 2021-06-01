@@ -84,6 +84,7 @@ def _calc_times():
 # Route to handle submission (submit button)
 @app.route("/_submission")
 def _submission():
+    db.tododb.drop()
     app.logger.debug("Submit ACP Time to DB")
     item_doc = {
         'open_time_field': request.args['open_time_field'],

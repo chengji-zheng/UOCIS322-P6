@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <title>Client Portal -- Display Brevets Time</title>
+    </head>
+    <body>
+        <h3>Check Your Brevets Timer Here ... </h3> 
+        <form>
+        <label>Choose the time you want to display</label>   
+        <select id="DataGroup" >
+            <option value="All">selectAll</option>
+            <option value="Open">openOnly</option>
+            <option value="Close">closeOnly</option>
+        </select>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <label>Choose the format you want to display</label>   
+    <select id="DataType" >
+        <option value="CSV">CSV</option>
+        <option value="JSON">JSON</option>
+    </select>
+    <br><br>
+    <label>Enter a # of quantity</label> 
+    <input id="qty" type="text" maxlength="2" />
+    <br><br>
+    </form>
+    <button id="submit">SUBMIT!!!</button>
+    </body>
+
+    <script>
+        // Defined the root of the script and the url to different routes.
+        var SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+        var TIME_CALC_URL = SCRIPT_ROOT + "/_calc_times";
+
+        $(document).ready(function(){
+            // Do the following when the page is finished loading
+
+            //Event handler to handle the events after submit button been clicked
+            $("#submit").click(
+                function(){
+                    // We first fetch data from each of fields.
+                    data = document.getEmementById("DataGroup").value();
+                    format = document.getEmementById("DataType").value();
+                    qty = document.getEmementById("qty").value();
+
+                    //Then We can use the values in dataGroup as situations, which is 3 cases.
+                    
+                    //Case #1 -- List All. In this case, we just need to consider the format either in 
+                    //JSON or in CSV, which means not have to consider the quanty.
+                    if (data == "All"){
+                        $.post( "/listAll", {format: format})
+                    };
+                    //Case #2 and #3 -- List Open or Close. In this case, we do need to consider both
+                    //the format (in JSON or in CSV) and the quanty user want to display. So, we will pass
+                    //format and qty.
+                    if (data == "Open"){
+                        $.post( "/listOpenOnly", {format: format, qty: qty})
+                    };
+                    if (data == "Close"){
+                        $.post( "/listCloseOnly", {format: format, qty: qty})
+                    };
+            });
+        });
+
+
+
+    </script>
+</html>
