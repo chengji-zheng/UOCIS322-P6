@@ -18,8 +18,8 @@
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <label>Choose the format you want to display</label>   
     <select id="DataType" >
-        <option value="CSV">CSV</option>
-        <option value="JSON">JSON</option>
+        <option value="csv">CSV</option>
+        <option value="json">JSON</option>
     </select>
     <br><br>
     <label>Enter a # of quantity</label> 
@@ -30,8 +30,7 @@
     <br><br><br>
 
     <div>
-        <p id="optputHere">
-        </p>
+        <p id="outputHere"></p>
     </div>
     </body>
 
@@ -40,7 +39,7 @@
         var SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
         var TIME_CALC_URL = SCRIPT_ROOT + "/_calc_times";
 
-        $(document).ready(function(){
+       $(document).ready(function(){
             // Do the following when the page is finished loading
 
             //Event handler to handle the events after submit button been clicked
@@ -48,31 +47,31 @@
                 function(e){
                     e.preventDefault();
                     // We first fetch data from each of fields.
-                    data = $("#DataGroup").val();
-                    format = $("#DataType").val();
-                    qty = $("#qty").val();
-
+                    var data = $("#DataGroup").val();
+                    var format = $("#DataType").val();
+                    var qty = $("#qty").val();
+                    console.log("data: ", data, "format: ", format, "qty: ", qty);
+                
                     //Then We can use the values in dataGroup as situations, which is 3 cases.
                     
                     //Case #1 -- List All. In this case, we just need to consider the format either in 
                     //JSON or in CSV, which means not have to consider the quanty.
+
                     if (data == "All"){
-                        var dir = SCRIPT_ROOT + "/listAll";
-                        $.get(dir, {data: DataGroup, format: DataType, qty: qty}, function(response){$("#outputHere").html(response)});
+                        $.get("/listAll", {format:format}, function(response){$("#outputHere").html(response)});
                     };
                     //Case #2 and #3 -- List Open or Close. In this case, we do need to consider both
                     //the format (in JSON or in CSV) and the quanty user want to display. So, we will pass
                     //format and qty.
                     if (data == "Open"){
-                        var dir = SCRIPT_ROOT + "/listOpenOnly";
-                        $.getJSON(dir, {data: DataGroup, format: DataType, qty: qty}, function(response){$("#outputHere").html(response)});
+                        $.get("/listOpenOnly", {format: format, qty: qty}, function(response){$("#outputHere").html(response)});
                     };
                     if (data == "Close"){
-                        var dir = SCRIPT_ROOT + "/listCloseOnly";
-                        $.getJSON(dir, {data: DataGroup, format: DataType, qty: qty}, function(response){$("#outputHere").html(response)});
+                        $.get("/listCloseOnly", {format: format, qty: qty}, function(response){$("#outputHere").html(response)});
                     };
-                    
-            });
+
+                }
+            );
         });
     </script>
 </html>

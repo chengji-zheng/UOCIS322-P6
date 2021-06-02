@@ -15,11 +15,10 @@ Brevet time calculator with AJAX, MongoDB, and a RESTful API!
 ##### 1. Fixed configuration files (ie. `dockerfiles`, `docker-configure.yml`)
 ##### 2. Added database drop methods to `flask_brevets.py` to drop the db before each running(adding).
 ##### 3. Added website services (ie. `website.py` and `website.html`) under `website` folder
+##### 4. Eventually EVERYTHING SEEMS WORKS FINE
 
-## Known Issue(s):
-###### 1. There are two errors under `line 103` and `line 106` of `api.py` which needs to be fixed;
-###### 2. Have not tested the web services under `website` folder
-###### 3. Might have other issue(s)
+
+## Since I made it works in the last minute, I don't have time to add comments to the code. Might refine them in the future if I have time.
 
 
 ## Credits
