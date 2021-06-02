@@ -5,28 +5,35 @@ import requests
 
 app = Flask(__name__)
 
-fileType = request.form.get("format") # Get File Type fetched from clientSide
-qty = request.form.get("qty")    # get the quantity from the clientSide
+# fileType = request.form.get("format") # Get File Type fetched from clientSide
+# qty = request.form.get("qty")    # get the quantity from the clientSide
 
 
 @app.route('/')
 @app.route('/index')
 def home():
-    return render_template('index.html')
+    return render_template('website.html')
 
 
-@app.route('/listAll', methods=["POST"])
-def listeverything():
-    r = requests.form.get('http://restapi:5000/listAll' + "/" + fileType)
+@app.route('/listAll')
+def listAll():
+    app.logger.setLevel("First Line of ListAll")
+    fileType = request.args.get("format") # Get File Type fetched from clientSide
+    qty = request.args.get("qty")    # get the quantity from the clientSide
+    r = requests.get('http://restapi:5000/listAll' + "/" + fileType)
     return r.text
 
-@app.route('/listOpenOnly', methods=["POST"])
-def listeverything():
+@app.route('/listOpenOnly')
+def listOpenOnly():
+    fileType = request.args.get("format") # Get File Type fetched from clientSide
+    qty = request.args.get("qty")    # get the quantity from the clientSide
     r = requests.get('http://restapi:5000/listOpenOnly' + "/" + fileType + "?top=" + qty)
     return r.text
 
-@app.route('/listCloseOnly', methods=["POST"])
-def listeverything():
+@app.route('/listCloseOnly')
+def listCloseOnly():
+    fileType = request.args.get("format") # Get File Type fetched from clientSide
+    qty = request.args.get("qty")    # get the quantity from the clientSide
     r = requests.get('http://restapi:5000/listCloseOnly' + "/" + fileType + "?top=" + qty)
     return r.text
 

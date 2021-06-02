@@ -2,4 +2,4 @@ arrow
 Flask
 pymongo
 pandas
-flask_restful
+flask-restful
